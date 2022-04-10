@@ -8,5 +8,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	insert into member(userid, passwd, username, post, addr1, addr2, phone1, phone2, phone3, email1, email2)
 	values( #{userid}, #{passwd}, #{username}, #{post}, #{addr1}, #{addr2}, #{phone1}, #{phone2}, #{phone3}, #{email1}, #{email2})
 	</insert>
+	
+	<select id="idCheck" parameterType="string" resultType="int">
+	select count(*)
+	from member
+	where userid = #{userid}
+	</select>
+	
+	<select id="login" parameterType="hashmap" resultType="memberDTO">
+		select userid, passwd, username, post, addr1, addr2, phone2, phone3, email1, email2
+		from member
+		where userid = #{userid} and passwd = #{passwd}
+	</select>
+	
+	<select id="mypage" parameterType="string" resultType="memberDTO">
+		select userid, passwd, username, post, addr1, addr2, phone2, phone3, email1, email2
+		from member
+		where userid = #{userid}
+	</select>
+	
+	<update id="memberUpdate" parameterType="MemberDTO">
+		update member
+		set post = #{post},
+		addr1 = #{addr1},
+		addr2 = #{addr2},
+		phone1 = #{phone1},
+		phone2 = #{phone2},
+		phone3 = #{phone3},
+		email1 = #{email1},
+		email2 = #{email2}
+		where userid = #{userid}
+	</update>
 
 </mapper>

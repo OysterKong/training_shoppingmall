@@ -36,13 +36,13 @@
 		$("#email2").val($(this).val());
 	}); //end change
 	
-	$("#userid").on("keyup", function(){
+	$("#userid").on("keyup", function(event){
 		$.ajax({
 			type: "get",
 			url: "MemberIdCheckServlet",
 			dataType: "text",
 			data: {
-				userid : $("userid").val()
+				userid : $("#userid").val()
 			},
 			success: function(responseData, status, xhr){
 				console.log(responseData);
@@ -60,8 +60,8 @@
  
 </script>    
 <form action="MemberAddServlet" method="get">
-*아이디:<input type="text" name="userid" id="userid"><br> 
-<span id="result"></span>
+*아이디:<input type="text" name="userid" id="userid">
+<span id="result"></span><br>
 *비밀번호:<input type="text" name="passwd" id="passwd"><br> 
 비빌번호확인:<input type="text" name="passwd2" id="passwd2">
 <span id="result2"></span>
