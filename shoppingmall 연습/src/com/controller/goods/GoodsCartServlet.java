@@ -50,7 +50,7 @@ public class GoodsCartServlet extends HttpServlet {
 				xx.setgColor(gColor);
 				xx.setgAmount(Integer.parseInt(gAmount));
 				xx.setUserid(userid);
-				System.out.println(xx);
+				//System.out.println(xx);
 				
 				CartService service = new CartService();
 				int n = service.CartAdd(xx); // CartMapper.cartAdd

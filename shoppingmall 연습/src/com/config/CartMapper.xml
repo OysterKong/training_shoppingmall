@@ -11,10 +11,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    </insert>
    
    <select id="cartList" parameterType="string" resultType="CartDTO">
-   select num, userid, gCode, gPrice, gSize, gColor, aAmount, gName, gImage
+   select num, userid, gCode, gPrice, gSize, gColor, gAmount, gName, gImage
    from cart
    where userid = #{userid}
    </select>
+   
+   <delete id="cartDel" parameterType="int">
+    delete
+    from cart
+    where num = #{num}
+   </delete>
 
 
 </mapper>

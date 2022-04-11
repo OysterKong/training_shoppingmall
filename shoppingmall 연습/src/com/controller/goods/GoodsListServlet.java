@@ -36,7 +36,7 @@ public class GoodsListServlet extends HttpServlet {
 		GoodsService service = new GoodsService();
 		List<GoodsDTO> list = service.goodsList(gCategory);
 		
-		request.setAttribute("gCategory", list);
+		request.setAttribute("goodsList", list);
 		RequestDispatcher dis = request.getRequestDispatcher("main.jsp");
 		dis.forward(request, response);
 	}

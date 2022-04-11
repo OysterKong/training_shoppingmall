@@ -29,11 +29,11 @@ public class GoodsRetrieveServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String gCode = request.getParameter("gCode");
-		System.out.println(gCode);
+		//System.out.println(gCode);
 		
 		GoodsService service = new GoodsService();
 		GoodsDTO dto = service.goodsRetrieve(gCode);
-		System.out.println(dto);
+		//System.out.println(dto);
 		
 		request.setAttribute("goodsRetrieve", dto);
 

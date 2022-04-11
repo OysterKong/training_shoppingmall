@@ -32,7 +32,7 @@ public class MainServlet extends HttpServlet {
 		GoodsService service = new GoodsService();
 		List<GoodsDTO> list = service.goodsList("top");
 		
-		System.out.println(list);
+		//System.out.println(list);
 		
 		request.setAttribute("goodsList", list);
 		RequestDispatcher dis = request.getRequestDispatcher("main.jsp");

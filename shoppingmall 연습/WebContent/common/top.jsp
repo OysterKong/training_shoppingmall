@@ -11,15 +11,15 @@
 <%= username %> 님 환영합니다.
 
 <a href="LogoutServlet">로그아웃</a>
-<a href="CartListServlet">장바구니</a>
 <a href="MyPageServlet">mypage</a>
+<a href="CartListServlet">장바구니목록</a>
 <%
 	} else {
 %>
 
 <a href="LoginUIServlet">로그인</a>
 <a href="MemberUIServlet">회원가입</a> <!-- mvc 패턴지키기 -->
-<a href="">장바구니</a>
+
 
 <%
 	}
