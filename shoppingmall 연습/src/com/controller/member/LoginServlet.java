@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userid = request.getParameter("userid");
 		String passwd = request.getParameter("passwd");
-		System.out.println(userid +"\t"+ passwd);
+		//System.out.println(userid +"\t"+ passwd);
 		
 		HashMap<String,String> map = new HashMap();
 		map.put("userid", userid);

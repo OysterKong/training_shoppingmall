@@ -45,7 +45,7 @@ public class MemberAddServlet extends HttpServlet {
 		MemberService service = new MemberService();
 		int n = service.memberAdd(dto); //insert 문은 결과값이 정수, 짝수 개념
 
-		System.out.println(n); // 최종적으로 데이터가 들어가고 나면 1이 찍힐것
+		//System.out.println(n); // 최종적으로 데이터가 들어가고 나면 1이 찍힐것
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("memberAdd", "회원가입성공, 축하해요");

@@ -46,7 +46,7 @@ public class MemberUpdateServlet extends HttpServlet {
 			
 			MemberDTO dto2 = new MemberDTO(userid,passwd,username,post,addr1,addr2,phone1,phone2,phone3,email1,email2);
 			
-			System.out.println(dto2);
+			//System.out.println(dto2);
 			MemberService service = new MemberService();
 			int num = service.memberUpdate(dto2); //insert 문은 결과값이 정수, 짝수 개념
 

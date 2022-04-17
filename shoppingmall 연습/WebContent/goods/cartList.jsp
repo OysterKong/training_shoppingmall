@@ -14,15 +14,63 @@ $(document).ready(function(){
 	$(".delBtn").on("click", function(){
 		var num = $(this).attr("data-xxx");
 		location.href="CartDelServlet?num="+num;
-	});
+	}); // delBtn end
 	
 
+	$(".updateBtn").on("click", function(){
+		var num = $(this).attr("data-xxx"); <%-- 152 줄, carAmount 의 id에 <%=num %> 붙이지 않아서 undefined 떨어졌던 것 --%>
+		var gAmount = $("#cartAmount"+num).val();
+		var gPrice = $(this).attr("data-price");
+		console.log(num);
+		console.log(gAmount);
+		$.ajax({
+			url : 'CartUpdateServlet',
+			type : 'get',
+			dataType : 'text',  //test 오타 발견 (수정완료)
+			data : {
+				num : num,
+				gAmount : gAmount
+			},
+			success : function(data, status, xhr){
+				var sum = gAmount*gPrice;
+				$("#sum"+num).text(sum);
+			},
+			error : function(xhr, status, error){
+				console.log("error");
+			}
+
+		})
+		
+	}); // updateBtn end
+	
+
+	$("#allCheck").on("click", function(){
+		var result = this.checked;
+		$(".check").each(function(idx,data){
+			this.checked = result;
+		})
+	}); //allCheck end
+
+	
+	$("#delAllCart1").on("click", function(){
+		var num = [];
+		$(".check:checked").each(function(idx,ele){
+			num[idx] = $(this).val();
+		})
+		console.log(num);
+		location.href = "CartDelAllServlet?data="+num;
+	}); // delAllCart end
+	
+	
+	$("#delAllCart2").on("click", function(){
+		$("form").attr("action", "CartDelAllServlet2");
+		$("form").submit();
+	}); // delAllCart2 end
 
 
-
-
-
-
+	
+	
+	
 
 });
 
@@ -83,6 +131,7 @@ $(document).ready(function(){
 <%
 
 	List<CartDTO> list = (List<CartDTO>)request.getAttribute("cartList"); // CartListServlet 에서 담아둔 값을 꺼내서 for문
+	/* System.out.println(list); */
 	for( int i=0; i< list.size(); i++){
 	CartDTO dto = list.get(i);
 	int num = dto.getNum();
@@ -108,7 +157,7 @@ $(document).ready(function(){
 			<td class="td_default" width="80">
 			<!-- checkbox는 체크된 값만 서블릿으로 넘어간다. 따라서 value에 삭제할 num값을 설정한다. -->
 			<input type="checkbox"
-				name="check" id="check81" class="check" value="81"></td>
+				name="check" id="check81" class="check" value="<%=num%>"></td>
 			<td class="td_default" width="80"><%=num %></td>
 			<td class="td_default" width="80"><img
 				src="images/items/<%=gImage %>.gif" border="0" align="center"
@@ -123,12 +172,15 @@ $(document).ready(function(){
 			</td>
 			<td class="td_default" align="center" width="90"><input
 				class="input_default" type="text" name="cartAmount"
-				id="cartAmount" style="text-align: right" maxlength="3"
+				id="cartAmount<%=num %>" style="text-align: right" maxlength="3"
 				size="2" value="<%=gAmount %>"></input></td>
 			<td><input type="button" value="수정"
-				onclick="amountUpdate('81')" /></td>
+				class="updateBtn"
+				data-xxx="<%=num %>"
+				data-price="<%= gPrice %>"/>
+				</td>
 			<td class="td_default" align="center" width="80"
-				style='padding-left: 5px'><span id="sum81">
+				style='padding-left: 5px'><span id="sum<%=num%>">
 				<%=gPrice*gAmount %>
 				</span></td>
 			<td><input type="button" value="주문"
@@ -157,8 +209,9 @@ $(document).ready(function(){
 	<tr>
 		<td align="center" colspan="5"><a class="a_black"
 			href="javascript:orderAllConfirm(myForm)"> 전체 주문하기 </a>&nbsp;&nbsp;&nbsp;&nbsp; 
-			<a class="a_black" href="javascript:delAllCart(myForm)"> 전체 삭제하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a class="a_black" href="index.jsp"> 계속 쇼핑하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a class="a_black" href="#" id="delAllCart1"> 전체 삭제하기 (삭제이벤트)</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a class="a_black" href="#" id="delAllCart2"> 전체 삭제하기 (폼전송)</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a class="a_black" href="main"> 계속 쇼핑하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
 		</td>
 	</tr>
 	<tr>

@@ -31,7 +31,7 @@ public class MemberIdCheckServlet extends HttpServlet {
 		
 		MemberService service = new MemberService();
 		int count = service.idCheck(userid);
-		System.out.println(count);
+		//System.out.println(count);
 		
 		String mesg = "아이디 사용가능";
 		if (count==1) {

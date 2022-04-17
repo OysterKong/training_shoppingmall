@@ -21,6 +21,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     from cart
     where num = #{num}
    </delete>
+   
+   <update id="cartUpdate" parameterType="hashMap">
+    update cart
+    set gAmount = #{gAmount}
+    where num = #{num}
+   </update>
+   
+   <delete id="cartAllDelete" parameterType="arraylist">
+   	delete from cart
+   	where num
+   	IN
+   	<foreach collection="list" item="item" open="(" separator="," close=")">
+   	#{item}
+   	</foreach>
+   </delete>
 
 
 </mapper>
