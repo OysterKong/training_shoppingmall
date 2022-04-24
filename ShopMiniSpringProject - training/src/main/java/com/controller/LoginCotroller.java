@@ -19,6 +19,12 @@ public class LoginCotroller {
 	@Autowired
 	MemberService service;
 	
+	@RequestMapping(value="/loginCheck/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:../";
+	}
+	
 	@RequestMapping(value="/login")
 	public String login(@RequestParam Map<String, String> map, HttpSession session, Model m){
 	System.out.println("map : " + map);	

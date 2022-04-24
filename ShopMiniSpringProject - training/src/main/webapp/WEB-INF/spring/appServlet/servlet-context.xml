@@ -13,6 +13,15 @@
 <mvc:view-controller path="/" view-name="main"/> <!-- main.jsp -->
 <mvc:view-controller path="/loginForm" view-name="loginForm"/>
 <mvc:view-controller path="/memberForm" view-name="memberForm"/>
+<mvc:view-controller path="/myPage" view-name="myPage"/> <!-- myPage.jsp , views 폴더의 myPage 를 불러오는 코드 -->
+
+<bean id="loginCheckInterceptor" class="com.interceptor.LoginCheckInterceptor"></bean>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/loginCheck/**" /> <!-- loginCheck요청에 대한 처리 -->
+			<ref bean="loginCheckInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 <!-- el태그, jstl 태그 디펜던시 추가 없이 사용 가능 -->
 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
